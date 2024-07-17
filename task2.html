@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino and VS Code Installation Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Installation Guide for Arduino IDE and VS Code IDE</h1>
+    </header>
+    <main>
+        <section id="task1">
+            <h2>Task 1: Installation of Arduino IDE software on an Ubuntu VM</h2>
+            <ol>
+                <li>
+                    <strong>Install the Arduino IDE on the Ubuntu VM.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/1.1.png" alt="Step 1.1 Image" />
+                        <p>You can directly install the Arduino IDE from the Ubuntu Software. In my case, I use Arduino IDE version 1.8.19.</p>
+                    </div>
+                </li>
+                <li>
+                    <strong>Open the Arduino IDE and open the Blink sketch from the Arduino Examples.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/1.2.png" alt="Step 1.2 Image" />   
+                    </div>
+                </li>
+                <li>
+                    <strong>Select an Arduino board as the target, such as Arduino Uno or Nano.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/1.3.png" alt="Step 1.3 Image" />
+                    </div>
+                </li>
+                <li>
+                    <strong>Build the Arduino sketch example.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/1.4.png" alt="Step 1.4 Image" />
+                    </div>
+                </li>
+                <li>
+                    <strong>Select the serial port corresponding to the attached Arduino board.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/1.3.png" alt="Step 1.5 Image" />
+                        <p>While writing this repository, I did not have an Arduino board with me, so I couldn't select the port. However, if you plug in the Arduino board and still don't see the port selection, I will address this issue in the troubleshooting section.</p>
+                    </div>
+                </li>
+                <li>
+                    <strong>Upload the compiled Arduino sketch to the Arduino board.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/1.6.png" alt="Step 1.6 Image" />
+                        <p>Use the check mark to verify, and then you can use the upload button to export the code to the Arduino.</p>
+                    </div>
+                </li>
+            </ol>
+            <p>Information about the software versions of installed programs:</p>
+            <p>Screenshots and troubleshooting: If you have problems selecting the port for the Arduino, go to Settings in VirtualBox and navigate to the USB settings section. Ensure that the USB controller is enabled, and then add a new USB filter for the Arduino board.If it still doesn't work, try the following steps: </p>
+                <img src="pic/1.7.png" alt="Step 1.7 Image" />
+        </section>
+
+        <section id="task2">
+            <h2>Task 2: Installation of VS Code IDE software and extensions</h2>
+            <ol>
+                <li>
+                    <strong>Install VS Code IDE for Windows (Host OS).</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/2.0.png" alt="Step 2.1 Image" />
+                        <p>You can directly install the VS code ide from the Ubuntu Software.</p>
+                    </div>
+                </li>
+                <li>
+                    <strong>Install the Remote Development Extension Pack for VS Code IDE.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/2.1.png" alt="Step 2.2 Image" />
+                    </div>
+                </li>
+                <li>
+                    <strong>Connect VS Code to the remote machine (Ubuntu).</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/2.3.1.png" alt="Step 2.3 Image" />
+                        <p>You need to open ssh server by this following steps</p>
+                        <img src="pic/2.3.2.png" alt="Step 2.3 Image" />
+                        <p>Then use 'ifconfig' to check your IP address; it should be on the line labeled 'inet.'</p>
+                        <img src="pic/2.3.3.png" alt="Step 2.3 Image" />
+                        <p>Open VS Code IDE. Use Ctrl+Shift+P, then add a new SSH host by typing ssh username@ip_address.</p>
+                    </div>
+                </li>
+                <li>
+                    <strong>Install the PlatformIO extension for Remote Development.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/2.4.1.png" alt="Step 2.4 Image" />
+                        <p>Don't forget to download the C/C++ extension pack. PlatformIO depends on this.</p>
+                    </div>
+                </li>
+                <li>
+                    <strong>Create a project using PlatformIO and the Arduino framework.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/2.4.2.png" alt="Step 2.5 Image" />
+                        <p>After installation, you might encounter problems creating a new project. Just use the PlatformIO terminal and follow the instructions in these pictures.</p>
+                        <img src="pic/2.5.0.png" alt="Step 2.5 Image" />
+                        <p>It should look like this.</p>
+                        <img src="pic/2.5.1.png" alt="Step 2.5 Image" />
+                        <p>To create a project, you can either create a new project or use a Project Example. For this case, I will use the Project Example of 'Blink.' Then, select the path of your folder. After that, click on the left side in the explorer to remote file on your host, and find the path to your project.</p>
+                    </div>
+                </li>
+                <li>
+                    <strong>Build the Arduino sketch and upload it to the target.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/2.6.1.png" alt="Step 2.6 Image" />
+                        <p>In this folder, some people might have a 'main.cpp' file instead of 'Blink.io.' It's the same, don't worry. Just copy the example code from the Arduino IDE as mentioned in the first task.</p>
+                        <img src="pic/Blinkk.png" alt="Step 2.6 Image" />
+                        <p>Then, look at the bottom. You will see the build and upload buttons. Use these to upload your work to the Arduino board. Don't forget to check the 'platformio.ini' file to ensure that the platform, board, and framework match your current Arduino board. When successful, it should look like this picture</p>
+                    </div>
+                </li>
+            </ol>
+            <p>Information about the software versions of installed programs: VS Code IDE 1.91.1,PlatformIO 3.3,Remote Development v0.25.0</p>
+            <p>Screenshots and troubleshooting: You might encounter a problem when trying to install PlatformIO, and it can't find the path to your Python. Use this command to fix it: sudo apt install python3.10-venv.</p>
+        </section>
+    </main>
+    <footer>
+        <p>Document your work and publish it on GitHub Pages.</p>
+    </footer>
+</body>
+</html>
