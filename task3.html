@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross-Compilation for Raspberry Pi 4B Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Guide for Cross-Compiling C Code for Raspberry Pi 4B on Ubuntu using VS Code</h1>
+    </header>
+    <main>
+        <section id="setup">
+            <h2>Setup: Install Cross-Compilation Tools on Ubuntu</h2>
+            <ol>
+                <li>
+                    <strong>Install the required cross-compilation tools.</strong>
+                    <p>Install the GCC toolchain for ARM architecture using the command: <code>sudo apt install gcc-arm-linux-gnueabihf</code></p>
+                </li>
+                <li>
+                    <strong>Verify the installation.</strong>
+                    <p>Run <code>arm-linux-gnueabihf-gcc --version</code> to ensure the cross-compiler is installed correctly.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section id="task1">
+            <h2>Task 1: Write and Cross-Compile C Code using VS Code</h2>
+            <ol>
+                <li>
+                    <strong>Write a simple C program (main.c).</strong>
+                    <p>Example C code for Raspberry Pi: <code>#include &lt;stdio.h&gt; int main() { printf("Hello from Raspberry Pi!"); return 0; }</code></p>
+                </li>
+                <li>
+                    <strong>Set up tasks.json for VS Code.</strong>
+                    <p>Create a build task in VS Code to use the ARM cross-compiler for building the C program.</p>
+                </li>
+                <li>
+                    <strong>Compile the C program.</strong>
+                    <p>Use the build task in VS Code (Ctrl+Shift+B) to compile the C code for the Raspberry Pi.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section id="task2">
+            <h2>Task 2: Transfer and Execute the Program on Raspberry Pi</h2>
+            <ol>
+                <li>
+                    <strong>Transfer the executable using scp.</strong>
+                    <p>Use the command: <code>scp main_rpi pi@<RPI_IP_ADDRESS>:/home/pi/</code> to transfer the compiled program.</p>
+                </li>
+                <li>
+                    <strong>Execute the program on Raspberry Pi.</strong>
+                    <div class="image-placeholder">
+                        <img src="pic/output.png" alt="Output of the program on Raspberry Pi" />
+                        <p>SSH into your Raspberry Pi and run the executable with <code>./main_rpi</code>. The output should display "Hello from Raspberry Pi!"</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>Troubleshooting</h2>
+            <ul>
+                <li>
+                    <strong>Issue:</strong> Cannot find the Raspberry Pi on the network.<br>
+                    <strong>Solution:</strong> Check your Raspberry Pi's IP using the command <code>ifconfig</code> and ensure SSH is enabled.
+                </li>
+                <li>
+                    <strong>Issue:</strong> Cross-compilation errors.<br>
+                    <strong>Solution:</strong> Ensure the correct toolchain is installed and verify the architecture using <code>file main_rpi</code>.
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>Created for documentation and educational purposes. Publish your guide on GitHub Pages for easy access.</p>
+    </footer>
+</body>
+</html>
