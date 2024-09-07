@@ -3,59 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cross-Compilation for Raspberry Pi 4B Guide</title>
+    <title>VS Code and Raspberry Pi GCC Guide</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Guide for Cross-Compiling C Code for Raspberry Pi 4B on Ubuntu using VS Code</h1>
+        <h1>Using VS Code with SSH to Compile and Run C Programs on Raspberry Pi</h1>
     </header>
     <main>
         <section id="setup">
-            <h2>Setup: Install Cross-Compilation Tools on Ubuntu</h2>
+            <h2>Setup: Connect VS Code to Raspberry Pi using SSH</h2>
             <ol>
                 <li>
-                    <strong>Install the required cross-compilation tools.</strong>
-                    <p>Install the GCC toolchain for ARM architecture using the command: <code>sudo apt install gcc-arm-linux-gnueabihf</code></p>
+                    <strong>Install VS Code Extensions.</strong>
+                    <p>Ensure you have installed the following extensions:
+                        <ul>
+                            <li><strong>Remote - SSH</strong>: For connecting to your Raspberry Pi.</li>
+                            <li><strong>C/C++</strong>: For syntax highlighting and IntelliSense for C/C++ code.</li>
+                        </ul>
+                    </p>
                 </li>
                 <li>
-                    <strong>Verify the installation.</strong>
-                    <p>Run <code>arm-linux-gnueabihf-gcc --version</code> to ensure the cross-compiler is installed correctly.</p>
+                    <strong>Connect to Raspberry Pi via SSH.</strong>
+                    <p>Open VS Code, press <code>Ctrl+Shift+P</code>, and select <strong>Remote-SSH: Connect to Host</strong>. Enter the SSH connection string, e.g., <code>pi@<RPI_IP_ADDRESS></code>.</p>
                 </li>
             </ol>
         </section>
 
         <section id="task1">
-            <h2>Task 1: Write and Cross-Compile C Code using VS Code</h2>
+            <h2>Task 1: Write and Compile C Code on Raspberry Pi</h2>
             <ol>
                 <li>
-                    <strong>Write a simple C program (main.c).</strong>
-                    <p>Example C code for Raspberry Pi: <code>#include &lt;stdio.h&gt; int main() { printf("Hello World"); return 0; }</code></p>
+                    <strong>Create a C program on Raspberry Pi.</strong>
+                    <p>Inside VS Code, create a file named <code>hello.c</code> on the Raspberry Pi:</p>
+                    <pre><code>#include &lt;stdio.h&gt;
+int main() {
+    printf("Hello, World!\\n");
+    return 0;
+}</code></pre>
                 </li>
                 <li>
-                    <strong>Set up tasks.json for VS Code.</strong>
-                    <p>Create a build task in VS Code to use the ARM cross-compiler for building the C program.</p>
+                    <strong>Compile the program on Raspberry Pi.</strong>
+                    <p>Open the integrated terminal in VS Code (using the SSH connection to Raspberry Pi) and run the following command to compile the C file using GCC:</p>
+                    <pre><code>gcc hello.c -o hello</code></pre>
                 </li>
                 <li>
-                    <strong>Compile the C program.</strong>
-                    <p>Use the build task in VS Code (Ctrl+Shift+B) to compile the C code for the Raspberry Pi.</p>
-                </li>
-            </ol>
-        </section>
-
-        <section id="task2">
-            <h2>Task 2: Transfer and Execute the Program on Raspberry Pi</h2>
-            <ol>
-                <li>
-                    <strong>Transfer the executable using scp.</strong>
-                    <p>Use the command: <code>scp main_rpi pi@<RPI_IP_ADDRESS>:/home/pi/</code> to transfer the compiled program.</p>
-                </li>
-                <li>
-                    <strong>Execute the program on Raspberry Pi.</strong>
+                    <strong>Run the compiled program.</strong>
+                    <p>Once compiled, run the program directly in the terminal:</p>
+                    <pre><code>./hello</code></pre>
                     <div class="image-placeholder">
-                        <img src="pic/setup.png" alt="Output of the program on Raspberry Pi" />
-                        <p>SSH into your Raspberry Pi and run the executable with <code>./main_rpi</code>. The output should display "Hello from Raspberry Pi!"</p>
+                        <img src="pic/output.png" alt="Hello World" />
+                        <p>This should output: <strong>Hello, World from Raspberry Pi!</strong></p>
                     </div>
                 </li>
             </ol>
         </section>
+
+        <section id="troubleshooting">
+            <h2>Troubleshooting</h2>
+            <ul>
+                <li>
+                    <strong>Issue:</strong> SSH connection fails.<br>
+                    <strong>Solution:</strong> Ensure SSH is enabled on Raspberry Pi by running <code>sudo raspi-config</code> and selecting <strong>Interfacing Options</strong> > <strong>SSH</strong>.
+                </li>
+                <li>
+                    <strong>Issue:</strong> Compilation errors.<br>
+                    <strong>Solution:</strong> Verify that GCC is installed on Raspberry Pi by running <code>gcc --version</code>. If not installed, use <code>sudo apt install gcc</code>.
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>Created for easy compilation and execution of C programs on Raspberry Pi via VS Code SSH integration.</p>
+    </footer>
+</body>
+</html>
