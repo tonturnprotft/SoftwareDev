@@ -90,64 +90,52 @@ int main() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VS Code and Raspberry Pi GCC Guide</title>
+    <title>VNC Remote Desktop Setup Guide for Raspberry Pi 4B</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Using VS Code with SSH to Compile and Run C Programs on Raspberry Pi</h1>
+        <h1>Remote Desktop Access using VNC for Raspberry Pi 4B</h1>
     </header>
     <main>
-        <section id="setup">
-            <h2>Setup: Connect VS Code to Raspberry Pi using SSH</h2>
+        <section id="task3">
+            <h2>Task: Set up and Access VNC Remote Desktop</h2>
             <ol>
                 <li>
-                    <strong>Install VS Code Extensions.</strong>
-                    <p>Ensure you have installed the following extensions:
-                        <ul>
-                            <li><strong>Remote - SSH</strong>: For connecting to your Raspberry Pi.</li>
-                            <li><strong>C/C++</strong>: For syntax highlighting and IntelliSense for C/C++ code.</li>
-                        </ul>
-                    </p>
+                    <strong>Enable VNC on Raspberry Pi Desktop (Raspberry Pi OS).</strong>
+                    <p>Open the Raspberry Pi Configuration tool, go to the 'Interfaces' tab, and enable VNC. Then, start the VNC server with the command: <code>sudo systemctl start vncserver-x11-serviced</code>.</p>
                 </li>
                 <li>
-                    <strong>Connect to Raspberry Pi via SSH.</strong>
-                    <p>Open VS Code, press <code>Ctrl+Shift+P</code>, and select <strong>Remote-SSH: Connect to Host</strong>. Enter the SSH connection string, e.g., <code>pi@<RPI_IP_ADDRESS></code>.</p>
+                    <strong>Enable VNC on Ubuntu Desktop.</strong>
+                    <p>Install the VNC server with <code>sudo apt install tightvncserver</code>. Enable Screen Sharing via Settings > Sharing.</p>
                 </li>
-            </ol>
-        </section>
-
-        <section id="task1">
-            <h2>Task 1: Write and Compile C Code on Raspberry Pi</h2>
-            <ol>
                 <li>
-                    <strong>Create a C program on Raspberry Pi.</strong>
-                    <p>Inside VS Code, create a file named <code>hello.c</code> on the Raspberry Pi:</p>
-                    <pre><code>#include &lt;stdio.h&gt;
-int main() {
-    printf("Hello, World!\\n");
-    return 0;
-}</code></pre>
-                    <p>This is a simple "Hello World" C program that will print the message to the terminal.</p>
+                    <strong>Install VNC Viewer on Windows 10/11.</strong>
+                    <p>Visit the <a href="https://www.realvnc.com/en/connect/download/viewer/" target="_blank">RealVNC website</a> to download VNC Viewer. Install the software on your Windows machine.</p>
+                </li>
+                <li>
+                    <strong>Find Raspberry Pi's IP Address.</strong>
+                    <p>On your Raspberry Pi, open a terminal and run <code>ifconfig</code>. Find the IP address under the network interface labeled 'inet'.</p>
+                </li>
+                <li>
+                    <strong>Connect to Raspberry Pi using VNC Viewer.</strong>
+                    <p>Open VNC Viewer on Windows and enter the Raspberry Pi's IP address (e.g., <code>192.168.1.100:1</code>). Log in with your Raspberry Pi's credentials.</p>
+                </li>
+                <li>
+                    <strong>Access Raspberry Pi Desktop via VNC.</strong>
+                    <p>Once connected, you should be able to see the Raspberry Pi desktop. The default desktop environment on Raspberry Pi OS uses X11.</p>
                     <div class="image-placeholder">
-                        <img src="pic/code.png" alt="Code Screenshot" />
-                        <p>Here is what the code should look like in VS Code:</p>
-                        <img src="/mnt/data/image.png" alt="C Program Screenshot" />
+                        <img src="pic/vnc_output.png" alt="Output: Raspberry Pi Desktop via VNC" />
+                        <p>Screenshot of Raspberry Pi desktop accessed via VNC.</p>
                     </div>
                 </li>
                 <li>
-                    <strong>Compile the program on Raspberry Pi.</strong>
-                    <p>Open the integrated terminal in VS Code (using the SSH connection to Raspberry Pi) and run the following command to compile the C file using GCC:</p>
-                    <pre><code>gcc hello.c -o hello</code></pre>
-                </li>
-                <li>
-                    <strong>Run the compiled program.</strong>
-                    <p>Once compiled, run the program directly in the terminal:</p>
-                    <pre><code>./hello</code></pre>
-                    <div class="image-placeholder">
-                        <img src="pic/vnc.png" alt="Hello World" />
-                        <p>This should output: <strong>Hello World!</strong></p>
-                    </div>
+                    <strong>Switch to Wayland Desktop (Ubuntu only).</strong>
+                    <ol>
+                        <li>Log out from your Ubuntu Desktop session.</li>
+                        <li>On the login screen, click the gear icon and select <strong>Ubuntu on Wayland</strong>.</li>
+                        <li>Log in and reconnect via VNC.</li>
+                    </ol>
                 </li>
             </ol>
         </section>
@@ -155,19 +143,15 @@ int main() {
         <section id="troubleshooting">
             <h2>Troubleshooting</h2>
             <ul>
-                <li>
-                    <strong>Issue:</strong> SSH connection fails.<br>
-                    <strong>Solution:</strong> Ensure SSH is enabled on Raspberry Pi by running <code>sudo raspi-config</code> and selecting <strong>Interfacing Options</strong> > <strong>SSH</strong>.
-                </li>
-                <li>
-                    <strong>Issue:</strong> Compilation errors.<br>
-                    <strong>Solution:</strong> Verify that GCC is installed on Raspberry Pi by running <code>gcc --version</code>. If not installed, use <code>sudo apt install gcc</code>.
-                </li>
+                <li><strong>Issue:</strong> Cannot connect via VNC.<br>
+                    <strong>Solution:</strong> Verify VNC is enabled and check if the correct IP address is used.</li>
+                <li><strong>Issue:</strong> Wayland session is slow or unresponsive.<br>
+                    <strong>Solution:</strong> Try using the X11 desktop environment, or update the VNC server and client to the latest version.</li>
             </ul>
         </section>
     </main>
     <footer>
-        <p>Created for easy compilation and execution of C programs on Raspberry Pi via VS Code SSH integration.</p>
+        <p>For more Raspberry Pi guides, visit the <a href="https://www.raspberrypi.org" target="_blank">Raspberry Pi official website</a>.</p>
     </footer>
 </body>
 </html>
